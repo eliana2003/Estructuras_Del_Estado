@@ -1,0 +1,1041 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estructura del Estado Colombiano</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #2b2a70;
+      --bg-deep: #22215c;
+      --line-art: #14133d;
+      --gold: #d8c29d;
+      --gold-soft: rgba(216, 194, 157, 0.16);
+      --white: #ffffff;
+      --soft: rgba(255, 255, 255, 0.84);
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-border: rgba(216, 194, 157, 0.3);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: radial-gradient(circle at 50% 15%, #353388 0%, var(--bg) 55%, var(--bg-deep) 100%);
+      color: var(--white);
+      min-height: 100vh;
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2.2rem;
+      padding: 1.8rem 1rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 10;
+    }
+    nav a {
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.25s ease;
+    }
+    nav a:hover { opacity: 0.65; }
+
+    .hero {
+      position: relative;
+      width: 100%;
+      min-height: 76vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem 1.2rem 4rem;
+    }
+
+    .line-art-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .draw-path {
+      stroke: var(--line-art);
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 2400;
+      stroke-dashoffset: 2400;
+      animation: drawLine 3.6s ease forwards;
+    }
+    .draw-path-light {
+      stroke: rgba(216, 194, 157, 0.35);
+      stroke-width: 1.4;
+      fill: none;
+      stroke-dasharray: 1200;
+      stroke-dashoffset: 1200;
+      animation: drawLine 4.2s ease 0.4s forwards;
+    }
+
+    @keyframes drawLine { to { stroke-dashoffset: 0; } }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    @keyframes growBar {
+      from { width: 0; }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+      margin: 0 auto;
+      animation: fadeUp 1s ease;
+    }
+
+    .monogram {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 1.4rem;
+      display: block;
+      animation: floatSlow 4s ease-in-out infinite;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+      margin-bottom: 1.8rem;
+    }
+
+    .btn-underline {
+      display: inline-block;
+      color: var(--white);
+      text-decoration: none;
+      background: none;
+      border: none;
+      border-bottom: 1.5px solid var(--white);
+      padding: 0.35rem 0.2rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+    }
+    .btn-underline:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .flow-container {
+      max-width: 1120px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .tier {
+      text-align: center;
+      animation: fadeUp 0.8s ease;
+    }
+
+    .tier-label {
+      display: inline-block;
+      color: var(--gold);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 1.3rem;
+    }
+
+    .connector {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 1.8rem 0;
+    }
+    .connector-line {
+      width: 1.5px;
+      height: 46px;
+      background: linear-gradient(to bottom, rgba(216,194,157,0.2), var(--gold));
+    }
+    .connector-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: 1.5px solid var(--gold);
+      background: var(--bg);
+      margin-top: -1px;
+    }
+
+    .tier-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: stretch;
+      gap: 1.15rem;
+    }
+
+    .inline-arrow {
+      display: flex;
+      align-items: center;
+      color: var(--gold);
+      font-size: 1.25rem;
+      opacity: 0.8;
+    }
+
+    .node-card {
+      flex: 1 1 200px;
+      max-width: 260px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 1.45rem 1.2rem;
+      backdrop-filter: blur(6px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
+      transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    }
+    .node-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--gold);
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .node-card h3 {
+      font-size: 0.98rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.5rem;
+    }
+    .node-card p {
+      font-size: 0.82rem;
+      color: var(--soft);
+      line-height: 1.55;
+      margin-bottom: 1.2rem;
+    }
+
+    .oculto { display: none !important; }
+
+    .vista-detalle {
+      max-width: 920px;
+      width: 100%;
+      margin: 2rem auto 5rem;
+      padding: 0 1.4rem;
+      animation: fadeUp 0.55s ease;
+    }
+
+    .detalle-box {
+      background: rgba(20, 19, 61, 0.72);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 2.3rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 24px 60px rgba(10, 9, 36, 0.45);
+    }
+
+    .detalle-box h2 {
+      font-size: clamp(1.65rem, 3.5vw, 2.3rem);
+      font-weight: 500;
+      margin: 0.5rem 0 0.9rem;
+    }
+
+    .detalle-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+      margin: 1.3rem 0;
+    }
+
+    .info-panel {
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      padding: 1.25rem;
+    }
+    .info-panel h4 {
+      color: var(--gold);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .info-panel p, .info-panel li {
+      font-size: 0.87rem;
+      color: var(--soft);
+      line-height: 1.65;
+    }
+    .info-panel ul { padding-left: 1.15rem; }
+    .info-panel li { margin-bottom: 0.45rem; }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 0.85rem;
+      margin-bottom: 1rem;
+    }
+    .kpi-card {
+      background: rgba(216, 194, 157, 0.09);
+      border: 1px solid rgba(216, 194, 157, 0.35);
+      border-radius: 12px;
+      padding: 0.95rem 0.85rem;
+      text-align: center;
+    }
+    .kpi-val {
+      display: block;
+      font-size: 1.22rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 0.25rem;
+    }
+    .kpi-lbl {
+      display: block;
+      font-size: 0.73rem;
+      color: var(--soft);
+      line-height: 1.35;
+    }
+
+    .bars-wrap { display: flex; flex-direction: column; gap: 0.7rem; margin-top: 0.6rem; }
+    .bar-row { display: flex; flex-direction: column; gap: 0.25rem; }
+    .bar-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--soft);
+    }
+    .bar-meta strong { color: var(--white); font-weight: 600; }
+    .bar-track {
+      width: 100%;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #a78bfa, var(--gold));
+      animation: growBar 0.9s ease;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 0.75rem;
+    }
+    .tl-item {
+      background: rgba(255, 255, 255, 0.035);
+      border-left: 2.5px solid var(--gold);
+      border-radius: 0 10px 10px 0;
+      padding: 0.65rem 0.8rem;
+    }
+    .tl-year {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.2rem;
+    }
+    .tl-desc {
+      font-size: 0.77rem;
+      color: var(--soft);
+      line-height: 1.45;
+    }
+
+    .chips-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .chip {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(216, 194, 157, 0.26);
+      border-radius: 999px;
+      padding: 0.38rem 0.85rem;
+      font-size: 0.77rem;
+      color: var(--white);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem 3rem;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.55);
+      letter-spacing: 0.08em;
+    }
+
+    @media (max-width: 720px) {
+      .inline-arrow { display: none; }
+      nav { gap: 1.1rem; font-size: 0.68rem; }
+      .detalle-box { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#escalon-1" class="nav-link">Base</a>
+    <a href="#escalon-2" class="nav-link">Control</a>
+    <a href="#escalon-3" class="nav-link">Nacional</a>
+    <a href="#escalon-4" class="nav-link">Distrital</a>
+  </nav>
+
+  <div id="vista-principal">
+    <section class="hero">
+      <svg class="line-art-bg" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice">
+        <path class="draw-path" d="M-20,420 C120,380 180,520 320,460 C430,410 380,290 480,240 C560,200 620,310 720,300 C850,285 880,140 1010,170 C1120,195 1080,350 1200,320 C1270,302 1280,220 1330,270 L1370,210 L1410,290 L1470,280" />
+        <path class="draw-path-light" d="M220,240 L265,215 L245,255 Z M265,215 C310,170 390,170 430,210 M880,140 L920,120 L905,155 Z M1060,120 C1120,85 1190,105 1230,150" />
+        <path class="draw-path-light" d="M1120,350 L1170,275 L1215,335 L1255,260 L1315,350" />
+      </svg>
+
+      <div class="hero-content">
+        <svg class="monogram" viewBox="0 0 80 80" fill="none">
+          <path d="M36 16H18V64H36M18 40H33" stroke="#ffffff" stroke-width="5.5" stroke-linecap="square"/>
+          <path d="M62 24C58 18 52 16 46 16C39 16 38 22 38 40C38 58 39 64 46 64C52 64 58 62 62 56" stroke="#ffffff" stroke-width="5.5" stroke-linecap="square"/>
+        </svg>
+        <h1>Estructura del<br>Estado Colombiano</h1>
+        <a href="#escalon-1" class="btn-underline">Explorar Diagrama</a>
+      </div>
+    </section>
+
+    <main class="flow-container">
+      <section id="escalon-1" class="tier">
+        <span class="tier-label">Escalón 01 · Base Conceptual</span>
+        <div class="tier-row">
+          <article class="node-card">
+            <div>
+              <h3>Elementos del Estado</h3>
+              <p>Población, territorio y soberanía reconocida por otros Estados.</p>
+            </div>
+            <div><button class="btn-underline btn-more" data-tema="elementos" type="button">Ampliar</button></div>
+          </article>
+
+          <div class="inline-arrow">→</div>
+
+          <article class="node-card">
+            <div>
+              <h3>Estructura del Estado</h3>
+              <p>Organización de ramas y entidades que cumplen los fines constitucionales.</p>
+            </div>
+            <div><button class="btn-underline btn-more" data-tema="estructura" type="button">Ampliar</button></div>
+          </article>
+        </div>
+      </section>
+
+      <div class="connector"><div class="connector-line"></div><div class="connector-dot"></div></div>
+
+      <section id="escalon-2" class="tier">
+        <span class="tier-label">Escalón 02 · Control Constitucional</span>
+        <div class="tier-row">
+          <article class="node-card">
+            <div>
+              <h3>Órganos de Control</h3>
+              <p>Control exógeno autónomo e independiente fuera de las tres ramas.</p>
+            </div>
+            <div><button class="btn-underline btn-more" data-tema="organos" type="button">Ampliar</button></div>
+          </article>
+
+          <div class="inline-arrow">→</div>
+
+          <article class="node-card">
+            <div>
+              <h3>Organismos de Control</h3>
+              <p>Control disciplinario, defensorial y fiscal en la Constitución de 1991.</p>
+            </div>
+            <div><button class="btn-underline btn-more" data-tema="organismos" type="button">Ampliar</button></div>
+          </article>
+
+          <div class="inline-arrow">→</div>
+
+          <article class="node-card">
+            <div>
+              <h3>Contraloría</h3>
+              <p>Máximo órgano técnico de control fiscal sobre los recursos públicos.</p>
+            </div>
+            <div><button class="btn-underline btn-more" data-tema="contraloria" type="button">Ampliar</button></div>
+          </article>
+        </div>
+      </section>
+
+      <div class="connector"><div class="connector-line"></div><div class="connector-dot"></div></div>
+
+      <section id="escalon-3" class="tier">
+        <span class="tier-label">Escalón 03 · Orden Nacional</span>
+        <div class="tier-row">
+          <article class="node-card">
+            <div>
+              <h3>Ministerio de Comercio</h3>
+              <p>Política nacional de comercio exterior, industria y turismo.</p>
+            </div>
+            <div><button class="btn-underline btn-more" data-tema="mincit" type="button">Ampliar</button></div>
+          </article>
+
+          <article class="node-card">
+            <div>
+              <h3>DIAN</h3>
+              <p>Autoridad tributaria, aduanera y cambiaria del orden nacional.</p>
+            </div>
+            <div><button class="btn-underline btn-more" data-tema="dian" type="button">Ampliar</button></div>
+          </article>
+
+          <article class="node-card">
+            <div>
+              <h3>INVIMA</h3>
+              <p>Autoridad sanitaria nacional de alimentos, medicamentos y cosméticos.</p>
+            </div>
+            <div><button class="btn-underline btn-more" data-tema="invima" type="button">Ampliar</button></div>
+          </article>
+
+          <article class="node-card">
+            <div>
+              <h3>Superintendencia de Sociedades</h3>
+              <p>Inspección, vigilancia y control de sociedades mercantiles.</p>
+            </div>
+            <div><button class="btn-underline btn-more" data-tema="supersociedades" type="button">Ampliar</button></div>
+          </article>
+
+          <article class="node-card">
+            <div>
+              <h3>Superintendencia Financiera</h3>
+              <p>Supervisión del sistema financiero, asegurador y bursátil.</p>
+            </div>
+            <div><button class="btn-underline btn-more" data-tema="superfinanciera" type="button">Ampliar</button></div>
+          </article>
+        </div>
+      </section>
+
+      <div class="connector"><div class="connector-line"></div><div class="connector-dot"></div></div>
+
+      <section id="escalon-4" class="tier">
+        <span class="tier-label">Escalón 04 · Orden Distrital y Registro</span>
+        <div class="tier-row">
+          <article class="node-card">
+            <div>
+              <h3>Secretaría Distrital de Hacienda</h3>
+              <p>Política financiera, fiscal y recaudo tributario de Bogotá D.C.</p>
+            </div>
+            <div><button class="btn-underline btn-more" data-tema="hacienda_bogota" type="button">Ampliar</button></div>
+          </article>
+
+          <article class="node-card">
+            <div>
+              <h3>Secretaría de Salud de Bogotá</h3>
+              <p>Modelo MAS Bienestar, rectoría e inspección sanitaria en el Distrito.</p>
+            </div>
+            <div><button class="btn-underline btn-more" data-tema="salud_bogota" type="button">Ampliar</button></div>
+          </article>
+
+          <article class="node-card">
+            <div>
+              <h3>Cámara de Comercio</h3>
+              <p>Registro mercantil y funciones públicas delegadas al comercio.</p>
+            </div>
+            <div><button class="btn-underline btn-more" data-tema="camara" type="button">Ampliar</button></div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      Eliana Rocio Palomino Contreras · Estructura del Estado Colombiano
+    </footer>
+  </div>
+
+  <!-- SECCIÓN APARTE UNIFORME PARA TODOS LOS 13 TEMAS -->
+  <section id="vista-detalle" class="vista-detalle oculto">
+    <div class="detalle-box">
+      <button id="btn-volver" class="btn-underline" type="button" style="margin-bottom:1.6rem;">← Volver al diagrama</button>
+
+      <div>
+        <span id="det-badge" class="tier-label" style="margin-bottom:0.2rem;"></span>
+        <h2 id="det-titulo"></h2>
+        <p id="det-que-es" style="color:var(--soft); line-height:1.7; font-size:0.95rem;"></p>
+      </div>
+
+      <!-- Bloque 1: Presupuesto y cifras clave (cuando aplica) -->
+      <div id="wrap-cifras" class="info-panel oculto" style="margin-top:1.3rem;">
+        <h4>Presupuesto y cifras clave</h4>
+        <div id="det-kpis" class="kpi-grid"></div>
+        <div id="det-barras" class="bars-wrap"></div>
+      </div>
+
+      <!-- Bloque 2: Línea de tiempo e historia (en todos) -->
+      <div class="info-panel" style="margin-top:1.3rem;">
+        <h4>Línea de tiempo e historia</h4>
+        <div id="det-historia" class="timeline"></div>
+      </div>
+
+      <!-- Bloque 3: Ubicación + Marco legal (en todos) -->
+      <div class="detalle-grid">
+        <div class="info-panel">
+          <h4>Ubicación en el Estado</h4>
+          <p id="det-ubicacion"></p>
+        </div>
+        <div class="info-panel">
+          <h4>Marco legal y leyes que lo respaldan</h4>
+          <ul id="det-leyes"></ul>
+        </div>
+      </div>
+
+      <!-- Bloque 4: Componentes y funciones clave (en todos) -->
+      <div class="info-panel" style="margin-bottom:1.2rem;">
+        <h4>Componentes y funciones clave</h4>
+        <ul id="det-funciones"></ul>
+      </div>
+
+      <!-- Bloque 5: Estructura, alcance y servicios (en todos) -->
+      <div class="info-panel" style="margin-bottom:1.2rem;">
+        <h4>Estructura, alcance y servicios</h4>
+        <div id="det-chips" class="chips-wrap"></div>
+      </div>
+
+      <!-- Bloque 6: Aplicación práctica (en todos) -->
+      <div class="info-panel">
+        <h4>Aplicación práctica</h4>
+        <p id="det-ejemplo"></p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const CONTENIDO = {
+      elementos: {
+        badge: 'Escalón 01 · Base Conceptual',
+        titulo: 'Elementos del Estado',
+        queEs: 'El Estado es un conglomerado social, política y jurídicamente constituido, asentado sobre un territorio determinado y sometido a una autoridad reconocida por otros Estados. Según la Guía del DNP y el Consejo de Estado (Concepto 1.367 de 2002), sus tres elementos esenciales para actuar como sujeto de derecho internacional son población, territorio y soberanía reconocida por otros Estados.',
+        historia: [
+          { year: 'Siglo XVI', desc: 'Maquiavelo introduce el término "Stato" en El Príncipe.' },
+          { year: 'Siglo XVIII', desc: 'Rousseau y Montesquieu plantean el contrato social y la separación de poderes.' },
+          { year: '1991', desc: 'Constitución Política: Títulos III y IV consagran población, territorio y soberanía.' },
+          { year: '2002', desc: 'Consejo de Estado (Concepto 1.367): define los tres elementos esenciales del Estado.' }
+        ],
+        ubicacion: 'Fundamento constitucional previo a la división de ramas (Títulos III y IV de la Constitución Política de 1991).',
+        leyes: [
+          'Constitución Política de 1991, Art. 3 (La soberanía reside exclusivamente en el pueblo).',
+          'Constitución Política de 1991, Art. 96 (Nacionalidad y población colombiana).',
+          'Constitución Política de 1991, Arts. 101, 102 y 332 (Territorio, subsuelo, mar territorial, espacio aéreo, espectro electromagnético y órbita geoestacionaria).',
+          'Consejo de Estado, Concepto 1.367 del 28 de febrero de 2002.'
+        ],
+        funciones: [
+          'Población (elemento humano): conjunto de individuos sometidos a la autoridad del Estado, incluidos nacionales por nacimiento o adopción y grupos étnicos.',
+          'Territorio (elemento físico): espacio de ~2.070.408 km² (55% continental y 45% marítimo) donde se ejerce la soberanía.',
+          'Soberanía (elemento internacional): independencia interior y exterior para gobernarse y relacionarse con otros Estados.'
+        ],
+        chips: ['Población', 'Territorio (2.070.408 km²)', 'Soberanía', 'Subsuelo y mar territorial', 'Espacio aéreo', 'Espectro electromagnético', 'Órbita geoestacionaria'],
+        ejemplo: 'Colombia ejerce su soberanía sobre su territorio continental, marítimo y aéreo y sobre su población, diferenciando Estado de nación, país, patria y República.'
+      },
+      estructura: {
+        badge: 'Escalón 01 · Base Conceptual',
+        titulo: 'Estructura del Estado Colombiano',
+        queEs: 'Colombia es un Estado Social de Derecho organizado en forma de República unitaria, descentralizada y con autonomía de sus entidades territoriales. Su estructura se integra por las Ramas del Poder Público (Legislativa, Ejecutiva y Judicial), los Órganos de Control, la Organización Electoral y los Órganos Autónomos e Independientes.',
+        historia: [
+          { year: '1886', desc: 'Colombia adopta el modelo de Estado unitario con centralización política.' },
+          { year: '1991', desc: 'Constitución Política (Arts. 1 y 113): Estado Social de Derecho y órganos autónomos.' },
+          { year: '1998', desc: 'Ley 489: organiza la Rama Ejecutiva y los mecanismos de coordinación.' },
+          { year: '2011', desc: 'Ley 1454 (LOOT): establece el ordenamiento político-administrativo territorial.' }
+        ],
+        ubicacion: 'Título V de la Constitución Política (Arts. 113 al 121) · Orden Nacional y Territorial.',
+        leyes: [
+          'Constitución Política de 1991, Arts. 1, 113, 115, 209 y 288.',
+          'Ley 489 de 1998, Arts. 5 al 14 y 38–39 (Organización de la Rama Ejecutiva, coordinación, delegación, desconcentración y descentralización).',
+          'Ley 1454 de 2011 (Ley Orgánica de Ordenamiento Territorial — LOOT).'
+        ],
+        funciones: [
+          'Aplicar el principio de centralización política y descentralización administrativa (territorial, funcional o por servicios y por colaboración).',
+          'Coordinar la Nación y el territorio bajo los principios de coordinación, concurrencia, complementariedad y subsidiariedad.',
+          'Articular el Sector Central (Presidencia, Ministerios, Departamentos Administrativos) y el Sector Descentralizado (Superintendencias, Establecimientos Públicos y UAE).'
+        ],
+        chips: ['Rama Legislativa', 'Rama Ejecutiva', 'Rama Judicial', 'Órganos de Control', 'Organización Electoral', 'Órganos Autónomos', 'Desconcentración · Delegación · Descentralización'],
+        ejemplo: 'El Congreso dicta las leyes (Legislativa), los ministerios y alcaldías las ejecutan (Ejecutiva), los jueces resuelven conflictos (Judicial) y los órganos independientes vigilan la gestión.'
+      },
+      organos: {
+        badge: 'Escalón 02 · Control Constitucional',
+        titulo: 'Órganos de Control',
+        queEs: 'Con el paso del Estado liberal al Estado Social de Derecho, los pesos y contrapesos entre las tres ramas resultaron insuficientes. Por ello se sumó al control endógeno (jerárquico y de tutela) un control exógeno ejercido por órganos autónomos e independientes reconocidos plenamente en la Constitución de 1991.',
+        historia: [
+          { year: '1830', desc: 'Origen constitucional del Ministerio Público en Colombia.' },
+          { year: '1886', desc: 'Órganos sin plena autonomía: subordinados al Gobierno o a la Cámara.' },
+          { year: '1991', desc: 'Constitución Política: crea el control exógeno autónomo e independiente.' },
+          { year: '2015', desc: 'Reforma de Equilibrio de Poderes: refuerza la autonomía de la Defensoría.' }
+        ],
+        ubicacion: 'Título X de la Constitución Política · No están adscritos ni vinculados a ninguna rama del poder público.',
+        leyes: [
+          'Constitución Política de 1991, Arts. 113 y 117.',
+          'Constitución Política de 1991, Título X (Arts. 267 a 284).',
+          'Acto Legislativo 02 de 2015 (Equilibrio de Poderes).'
+        ],
+        funciones: [
+          'Ejercer un control exógeno e independiente sobre todos los órganos y ramas del poder público.',
+          'Garantizar la función pública de control fiscal, control disciplinario y control defensorial.',
+          'Medir logros, prevenir riesgos y sancionar desafueros en el ejercicio de la función pública.'
+        ],
+        chips: ['Control exógeno', 'Autonomía administrativa', 'Autonomía presupuestal', 'Control fiscal', 'Control disciplinario', 'Control defensorial'],
+        ejemplo: 'Ningún ministerio ni el Presidente puede interferir en las investigaciones de los órganos de control, pues actúan con independencia constitucional.'
+      },
+      organismos: {
+        badge: 'Escalón 02 · Control Constitucional',
+        titulo: 'Organismos de Control',
+        queEs: 'Son las entidades específicas a las que la Constitución confía tres controles: el control disciplinario (Procuraduría y personerías), el control defensorial —figura del Ombudsman— (Defensoría del Pueblo) y el control fiscal (Contraloría General, contralorías territoriales y Auditoría General de la República).',
+        historia: [
+          { year: '1991', desc: 'Constitución Política: crea la Defensoría del Pueblo y fortalece Procuraduría y Contraloría.' },
+          { year: '1992', desc: 'Ley 24: establece la organización y funcionamiento de la Defensoría del Pueblo.' },
+          { year: '2000', desc: 'Decretos Ley 262, 267 y 272: estructura orgánica de Procuraduría, Contraloría y Auditoría.' },
+          { year: '2021', desc: 'Decreto 1851: reconfigura la estructura y planta de la Procuraduría.' }
+        ],
+        ubicacion: 'Organigrama oficial de Función Pública: Contraloría General, Auditoría General y Ministerio Público (Procuraduría, IEMP y Defensoría).',
+        leyes: [
+          'Constitución Política de 1991, Arts. 117, 118, 119 y 275 a 284.',
+          'Decreto Ley 262 de 2000 y Decreto 1851 de 2021 (Procuraduría e IEMP).',
+          'Ley 24 de 1992 y Decreto 025 de 2014 (Defensoría del Pueblo).',
+          'Decreto Ley 272 de 2000 y Ley 106 de 1993 (Auditoría General de la República).'
+        ],
+        funciones: [
+          'Ministerio Público (Procuraduría, Defensoría y Personerías): guarda y promoción de derechos humanos, protección del interés público y vigilancia disciplinaria con poder preferente.',
+          'Control Fiscal (Contralorías): vigilancia de la gestión fiscal de la administración y de particulares que manejen fondos públicos.',
+          'Auditoría General de la República: vigilancia de la gestión fiscal de la Contraloría General y de las contralorías territoriales.'
+        ],
+        chips: ['Contraloría General', 'Auditoría General', 'Procuraduría General', 'Defensoría del Pueblo', 'Instituto de Estudios (IEMP)', 'Personerías'],
+        ejemplo: 'Ante un hecho de corrupción en una entidad pública, la Procuraduría sanciona disciplinariamente al funcionario, la Contraloría recupera el dinero público y la Defensoría protege los derechos ciudadanos.'
+      },
+      contraloria: {
+        badge: 'Escalón 02 · Control Constitucional',
+        titulo: 'Contraloría General de la República',
+        queEs: 'Organismo de carácter técnico con autonomía administrativa y presupuestal que no hace parte de ninguna rama del poder público. Ejerce en representación de la comunidad la vigilancia de la gestión fiscal de la administración y de los particulares o entidades que manejen fondos o bienes de la Nación.',
+        historia: [
+          { year: '1991', desc: 'Constitución Política (Arts. 267–268): consagra su autonomía técnica y presupuestal.' },
+          { year: '1993', desc: 'Leyes 42 y 106: principios de control fiscal y organización orgánica.' },
+          { year: '2000', desc: 'Decreto Ley 267 y Ley 610: estructura y procesos de responsabilidad fiscal.' },
+          { year: '2019–20', desc: 'Acto Legislativo 4 de 2019, Decreto 2037 (DIARI) y Decreto 405 de 2020.' }
+        ],
+        ubicacion: 'Organismos de Control · Orden Nacional (con Gerencias Departamentales y el Fondo de Bienestar Social adscrito).',
+        leyes: [
+          'Constitución Política de 1991, Arts. 117, 267, 268 y 272 (y Acto Legislativo 4 de 2019).',
+          'Ley 42 de 1993 (Control fiscal) y Ley 610 de 2000 (Responsabilidad fiscal).',
+          'Ley 106 de 1993, Decreto Ley 267 de 2000 y Ley 1474 de 2011 (Art. 128).',
+          'Ley 1807 de 2016 (CEF), Decreto 2037 de 2019 (DIARI) y Decreto 405 de 2020.'
+        ],
+        funciones: [
+          'Ejercer control financiero, de gestión y de resultados fundado en eficiencia, economía, equidad y valoración de costos ambientales.',
+          'Revisar y fenecer las cuentas de los responsables del erario y llevar el registro de la deuda pública.',
+          'Establecer responsabilidades fiscales, imponer sanciones pecuniarias y ejercer jurisdicción coactiva.',
+          'Presentar al Congreso el informe anual sobre el estado de los recursos naturales y del ambiente.'
+        ],
+        chips: ['Despacho del Contralor', 'Contralorías Delegadas', 'DIARI (Reacción Inmediata)', 'Centro de Estudios Fiscales (CEF)', 'Gerencias Departamentales', 'Fondo de Bienestar Social'],
+        ejemplo: 'Audita la ejecución de recursos públicos en obras o contratos estatales; si halla detrimento patrimonial, adelanta un proceso de responsabilidad fiscal para resarcir el patrimonio público.'
+      },
+      mincit: {
+        badge: 'Escalón 03 · Orden Nacional',
+        titulo: 'Ministerio de Comercio, Industria y Turismo (MinCIT)',
+        queEs: 'Formula y coordina las políticas generales de desarrollo económico y social para que las empresas crezcan, el país venda más al mundo y el turismo se fortalezca. En 2026 lo dirige el ministro Mauricio Gómez Amín.',
+        kpis: [
+          { val: '≈ $806 mil M', lbl: 'Presupuesto total 2026 del MinCIT' },
+          { val: '82% ($660 mil M)', lbl: 'Funcionamiento (personal y administración)' },
+          { val: '18% ($146 mil M)', lbl: 'Inversión en proyectos y programas' },
+          { val: '≈ $284 mil M', lbl: 'Inversión preliminar de todo el sector' }
+        ],
+        barras: [
+          { label: 'Funcionamiento', value: '≈ $660 mil millones (82%)', pct: 82 },
+          { label: 'Inversión en proyectos y programas', value: '≈ $146 mil millones (18%)', pct: 18 }
+        ],
+        historia: [
+          { year: '1991', desc: 'Ley 7: Se crea el Ministerio de Comercio Exterior.' },
+          { year: '2002', desc: 'Ley 790: Fusiona Desarrollo Económico y Comercio Exterior.' },
+          { year: '2003', desc: 'Decreto 210 (3 de feb): Fija su objetivo y estructura.' },
+          { year: '2026', desc: 'Dirigido por el ministro Mauricio Gómez Amín.' }
+        ],
+        ubicacion: 'Rama Ejecutiva · Orden Nacional · Sector Comercio, Industria y Turismo (3 Viceministerios: Comercio Exterior, Desarrollo Empresarial y Turismo).',
+        leyes: [
+          'Ley 7 de 1991 (Creación del Ministerio de Comercio Exterior).',
+          'Ley 790 de 2002, Art. 4 (Fusión que crea el MinCIT).',
+          'Decreto 210 de 2003 (Objetivo, estructura orgánica y funciones) y Decreto 1289 de 2015.'
+        ],
+        funciones: [
+          'Comercio exterior: exportaciones, inversión extranjera y acuerdos comerciales.',
+          'Industria y empresa: apoyo a la micro, pequeña y mediana empresa (MiPymes).',
+          'Turismo: política para destinos y productos turísticos competitivos.',
+          'Orientar y coordinar entidades del sector y programas estratégicos.'
+        ],
+        chips: ['SIC', 'Supersociedades', 'Instituto de Metrología', 'Junta Central de Contadores', 'Artesanías de Colombia', 'ProColombia', 'iNNpulsa', 'Fontur'],
+        ejemplo: 'Se refleja al comprar un producto (reglamentos técnicos y metrología garantizan calidad y medidas justas) y cuando se exportan bienes colombianos mediante acuerdos comerciales.'
+      },
+      dian: {
+        badge: 'Escalón 03 · Orden Nacional',
+        titulo: 'DIAN (Dirección de Impuestos y Aduanas Nacionales)',
+        queEs: 'Unidad Administrativa Especial del orden nacional, de carácter técnico y especializado, adscrita al Ministerio de Hacienda y Crédito Público, con autonomía administrativa y presupuestal. Garantiza la seguridad fiscal del Estado y protege el orden público económico administrando obligaciones tributarias, aduaneras, cambiarias y derechos de juegos de suerte y azar.',
+        kpis: [
+          { val: '$3,67 B', lbl: 'Presupuesto 2026 asignado a la DIAN' },
+          { val: '$197,4 B', lbl: 'Recaudo ene–jul 2026 (62,3% de la meta)' },
+          { val: '$317 B', lbl: 'Meta anual de recaudo 2026' },
+          { val: '50 sedes', lbl: '30 Imp. y Aduanas · 6 Aduanas · 7 Impuestos · 7 Delegadas' }
+        ],
+        barras: [
+          { label: 'Avance meta anual (ene–jul 2026)', value: '$197,4 B / $317 B (62,3%)', pct: 62.3 },
+          { label: 'Retención en la renta (ene–jul 2026)', value: '$68 billones', pct: 100 },
+          { label: 'IVA (ene–jul 2026)', value: '$45,8 billones', pct: 67.4 },
+          { label: 'Tributos Aduaneros (ene–jul 2026)', value: '$28,5 billones', pct: 41.9 },
+          { label: 'Impuestos de Renta (ene–jul 2026)', value: '$21,4 billones', pct: 31.5 }
+        ],
+        historia: [
+          { year: '1992', desc: 'Decreto 2117: Crea la UAE y fusiona DIN + DAN (opera desde 1 jun 1993).' },
+          { year: '1999', desc: 'Decreto 1071: Reestructuración y organización.' },
+          { year: '2008', desc: 'Decreto 4048: Nueva estructura y funciones generales.' },
+          { year: '2011–15', desc: 'Decretos 1321 y 1292: Modificaciones a la estructura.' },
+          { year: '2016', desc: 'Ley 1819: Modernización institucional de la DIAN.' },
+          { year: '2020', desc: 'Decreto 1742: Estructura vigente hasta hoy.' }
+        ],
+        ubicacion: 'Rama Ejecutiva · Orden Nacional · Adscrita al Ministerio de Hacienda y Crédito Público (8 Direcciones de Gestión y 50 Direcciones Seccionales).',
+        leyes: [
+          'Decreto 2117 de 1992 (Creación y fusión DIN + DAN) y Decreto 1071 de 1999.',
+          'Decreto 4048 de 2008, Decretos 1321 de 2011 y 1292 de 2015.',
+          'Ley 1819 de 2016 (Modernización institucional) y Decreto 1742 de 2020 (Estructura vigente).'
+        ],
+        funciones: [
+          'Impuestos: administra renta, timbre, IVA y otros tributos nacionales (recaudo, fiscalización, cobro, devolución y sanción).',
+          'Aduanas y Zonas Francas: dirige la gestión aduanera, controla zonas francas y dispone de mercancía aprehendida o decomisada.',
+          'Control Cambiario: vigila operaciones en importaciones y exportaciones (subfacturación y sobrefacturación).',
+          'Policía Fiscal y Aduanera (POLFA) y Doctrina: apoya fiscalización con funciones de policía judicial e interpreta normas del sector.'
+        ],
+        chips: ['Impuesto', 'Aduana', 'Fiscalización', 'Estratégica y de Analítica', 'Innovación y Tecnología', 'Corporativa', 'Jurídica', 'Policía Fiscal y Aduanera', 'Grandes Contribuyentes', 'Defensor del Contribuyente'],
+        ejemplo: 'Financia al Estado sosteniendo el gasto público, facilita el comercio exterior con transparencia y legalidad, y combate la evasión, el contrabando y la subfacturación.'
+      },
+      invima: {
+        badge: 'Escalón 03 · Orden Nacional',
+        titulo: 'INVIMA',
+        queEs: 'El Instituto Nacional de Vigilancia de Medicamentos y Alimentos es la Autoridad Sanitaria Nacional, establecimiento público técnico-científico adscrito al Ministerio de Salud y Protección Social. Protege la salud del consumidor, facilita el comercio regulado y apoya la competitividad empresarial.',
+        historia: [
+          { year: '1993', desc: 'Ley 100, Art. 245: Creación legal del INVIMA.' },
+          { year: '1995', desc: 'Inicio oficial de operaciones como autoridad sanitaria.' },
+          { year: '2012', desc: 'Decreto 2078: Estructura orgánica y enfoque de gestión de riesgo.' }
+        ],
+        ubicacion: 'Rama Ejecutiva · Orden Nacional · Establecimiento Público adscrito a MinSalud (Consejo Directivo, Director General, Grupos de Trabajo Territorial y laboratorios regionales).',
+        leyes: [
+          'Ley 100 de 1993, Art. 245 (Creación del INVIMA).',
+          'Decreto 2078 de 2012 (Estructura orgánica y funciones del INVIMA).',
+          'Ley 9ª de 1979 (Código Sanitario Nacional).'
+        ],
+        funciones: [
+          'Inspección: visitas a establecimientos (fábricas, almacenes, puertos, aeropuertos y fronteras) para verificar cumplimiento.',
+          'Vigilancia: monitoreo de seguridad e inocuidad en el mercado (farmacovigilancia, tecnovigilancia, vigilancia de alimentos y reactivovigilancia).',
+          'Control: operación de laboratorios propios (laboratorio nacional de referencia) y red de laboratorios de control de calidad.',
+          'Registro Sanitario: evaluación técnica y científica para autorizar o negar la comercialización de productos.'
+        ],
+        chips: ['Medicamentos y biológicos', 'Alimentos y bebidas', 'Dispositivos médicos', 'Cosméticos', 'Productos naturales y biotecnología', 'Reactivos de diagnóstico in vitro', 'Plaguicidas y aseo'],
+        ejemplo: 'Para obtener un Registro Sanitario se cumplen 4 etapas: 1) Solicitud técnica → 2) Evaluación científica → 3) Decisión (concesión o negación) → 4) Vigilancia post-mercado (incluidos sellos de advertencia nutricional).'
+      },
+      supersociedades: {
+        badge: 'Escalón 03 · Orden Nacional',
+        titulo: 'Superintendencia de Sociedades',
+        queEs: 'Organismo técnico adscrito al Ministerio de Comercio, Industria y Turismo, con personería jurídica y autonomía administrativa, mediante el cual el Presidente ejerce la inspección, vigilancia y control de las sociedades mercantiles.',
+        historia: [
+          { year: '1995', desc: 'Ley 222: Define el régimen de inspección, vigilancia y control societario.' },
+          { year: '2006', desc: 'Ley 1116: Establece el régimen de insolvencia empresarial.' },
+          { year: '2020', desc: 'Decreto 1736: Estructura orgánica actual de la entidad.' },
+          { year: '2020', desc: 'Ley 2069 (Art. 70): Asume vigilancia sobre las Cámaras de Comercio.' }
+        ],
+        ubicacion: 'Rama Ejecutiva · Orden Nacional · Superintendencia con personería jurídica adscrita al MinCIT.',
+        leyes: [
+          'Ley 222 de 1995 (Inspección, vigilancia y control societario).',
+          'Ley 1116 de 2006 (Régimen de insolvencia empresarial).',
+          'Decreto 1736 de 2020 (Estructura actual) y Ley 2069 de 2020 (Vigilancia a Cámaras de Comercio).'
+        ],
+        funciones: [
+          'Vigilar el cumplimiento legal, contable y estatutario de las sociedades comerciales no vigiladas por la Superfinanciera.',
+          'Tramitar procesos de reorganización y liquidación empresarial (insolvencia).',
+          'Ejercer la inspección, vigilancia y control sobre las Cámaras de Comercio.'
+        ],
+        chips: ['Inspección, vigilancia y control', 'Reorganización empresarial', 'Liquidación judicial', 'Supervisión a Cámaras de Comercio', 'Adscrita al MinCIT'],
+        ejemplo: 'Cuando una empresa entra en crisis financiera, puede solicitar ante la Superintendencia de Sociedades un proceso de reorganización para proteger empleos y acordar pagos.'
+      },
+      superfinanciera: {
+        badge: 'Escalón 03 · Orden Nacional',
+        titulo: 'Superintendencia Financiera de Colombia',
+        queEs: 'Organismo técnico adscrito al Ministerio de Hacienda y Crédito Público encargado de supervisar el sistema financiero, asegurador y bursátil colombiano para preservar su estabilidad, seguridad y confianza.',
+        historia: [
+          { year: '1993', desc: 'Decreto 663: Expide el Estatuto Orgánico del Sistema Financiero.' },
+          { year: '2005', desc: 'Decreto 4327 y Ley 964: Fusión de la Superbancaria y la Supervalores.' },
+          { year: '2010', desc: 'Decreto 2555: Decreto Único del sector financiero, asegurador y de valores.' },
+          { year: '2019', desc: 'Decreto 2399: Modificación parcial de la estructura de la SFC.' }
+        ],
+        ubicacion: 'Rama Ejecutiva · Orden Nacional · Superintendencia con personería jurídica adscrita al Ministerio de Hacienda y Crédito Público.',
+        leyes: [
+          'Decreto 663 de 1993 (Estatuto Orgánico del Sistema Financiero) y Ley 964 de 2005 (Mercado de Valores).',
+          'Decreto 4327 de 2005 (Creación por fusión) y Decreto 2555 de 2010 (Decreto Único del sector).',
+          'Decreto 2399 de 2019 (Ajuste estructural).'
+        ],
+        funciones: [
+          'Ejercer inspección, vigilancia y control sobre bancos, aseguradoras, fondos de pensiones y comisionistas de bolsa.',
+          'Proteger los derechos de ahorradores, inversionistas y asegurados.',
+          'Prevenir y sancionar la captación ilegal de recursos del público.'
+        ],
+        chips: ['Bancos y financieras', 'Aseguradoras', 'Fondos de pensiones', 'Mercado de valores', 'Protección al consumidor financiero', 'Adscrita al MinHacienda'],
+        ejemplo: 'Supervisa que los bancos mantengan solvencia financiera, respondan de forma justa a los clientes y combate esquemas ilegales de captación de dinero.'
+      },
+      hacienda_bogota: {
+        badge: 'Escalón 04 · Orden Distrital y Registro',
+        titulo: 'Secretaría Distrital de Hacienda de Bogotá',
+        queEs: 'Entidad del sector central de la Administración Distrital encargada de dirigir y administrar la política financiera y fiscal de Bogotá. Su propósito es administrar responsablemente los recursos públicos para apoyar el funcionamiento y desarrollo de la ciudad.',
+        historia: [
+          { year: '1991', desc: 'Constitución Política: Consagra a Bogotá como Distrito Capital.' },
+          { year: '1993', desc: 'Decreto Ley 1421: Estatuto Orgánico y régimen especial de Bogotá.' },
+          { year: '2014', desc: 'Decreto Distrital 601: Organización y funciones de la Secretaría.' }
+        ],
+        ubicacion: 'Rama Ejecutiva · Orden Territorial · Sector Central de la Alcaldía Mayor de Bogotá D.C.',
+        leyes: [
+          'Constitución Política de 1991 (Régimen del Distrito Capital).',
+          'Decreto Ley 1421 de 1993 (Régimen especial de Bogotá).',
+          'Acuerdo Distrital 257 de 2006 y Decreto Distrital 601 de 2014 (Organización y funciones).'
+        ],
+        funciones: [
+          'Recaudar ingresos e impuestos distritales.',
+          'Formular y administrar el presupuesto de Bogotá.',
+          'Gestionar la tesorería y pagos del Distrito.',
+          'Llevar la contabilidad pública y gestionar el crédito y la planeación financiera.'
+        ],
+        chips: ['Impuesto Predial', 'Impuesto de Vehículos', 'ICA (Industria y Comercio)', 'Delineación Urbana', 'Plataforma BogData', 'Educación · Salud · Movilidad · Seguridad · Infraestructura'],
+        ejemplo: 'Administra y planea los recursos recaudados (Predial, Vehículos, ICA y Delineación Urbana) con apoyo de BogData, y las entidades responsables los ejecutan en educación, salud, movilidad, seguridad e infraestructura.'
+      },
+      salud_bogota: {
+        badge: 'Escalón 04 · Orden Distrital y Registro',
+        titulo: 'Secretaría Distrital de Salud de Bogotá',
+        queEs: 'Ente rector del sector salud en Bogotá D.C., bajo el Modelo MAS Bienestar (Atención Primaria Social) y dirigida por el secretario Gerson Bermont. Orienta la salud pública, el aseguramiento y la vigilancia sanitaria para cuidar a la ciudadanía.',
+        kpis: [
+          { val: '$5,4 B', lbl: 'Presupuesto anual (administrado por el FFDS)' },
+          { val: '12,6%', lbl: 'Participación en el presupuesto de Bogotá (3er sector más grande)' },
+          { val: '8,14 M', lbl: 'Personas aseguradas en salud en Bogotá' },
+          { val: '1,7 M', lbl: 'Personas en el Régimen Subsidiado' }
+        ],
+        barras: [
+          { label: 'Participación del sector Salud en el presupuesto de Bogotá', value: '12,6% ($5,4 billones)', pct: 12.6 },
+          { label: 'Asegurados en Régimen Subsidiado sobre el total de Bogotá', value: '1,7 M de 8,14 M (20,9%)', pct: 20.9 }
+        ],
+        historia: [
+          { year: '1971', desc: 'Acuerdo 14: Crea el Servicio de Salud.' },
+          { year: '1990', desc: 'Acuerdo 20: Sistema Distrital de Salud y FFDS.' },
+          { year: '2006', desc: 'Acuerdo 257: Define el Sector Salud actual.' },
+          { year: '2013', desc: 'Decreto 507: Estructura interna de la SDS.' },
+          { year: '2016', desc: 'Acuerdo 641: Fusión de 22 hospitales en 4 Subredes.' }
+        ],
+        ubicacion: 'Rama Ejecutiva · Orden Territorial · Despacho del Secretario, 5 Subsecretarías y 5 entidades adscritas (FFDS y 4 Subredes Integradas de Servicios de Salud).',
+        leyes: [
+          'Ley 100 de 1993 (Sistema General de Seguridad Social en Salud — SGSSS).',
+          'Ley 715 de 2001 (Competencias territoriales y SGP).',
+          'Ley Estatutaria 1751 de 2015 (Salud como derecho fundamental).',
+          'Decreto Distrital 507 de 2013 y Acuerdo 641 de 2016 (4 Subredes).'
+        ],
+        funciones: [
+          'Rectoría en salud pública e inversión en salud pública colectiva e infraestructura hospitalaria.',
+          'Aseguramiento del Régimen Subsidiado (1,7 millones de personas).',
+          'Inspección, Vigilancia y Control sanitario (IVC) en establecimientos abiertos al público.',
+          'Gestión de urgencias y emergencias a través del CRUE.'
+        ],
+        chips: ['5 Subsecretarías', 'FFDS', 'Subred Norte · Sur · Centro Oriente · Sur Occidente', 'Línea 123 (CRUE)', 'Línea 106 (Salud mental 24/7)', '+200 puntos de vacunación', 'Sellos sanitarios', 'Observatorio SaluData'],
+        ejemplo: 'La ciudadanía accede a ambulancias por la Línea 123 (CRUE), apoyo en salud mental gratis 24/7 en la Línea 106, más de 200 puntos de vacunación gratuita, sellos sanitarios en restaurantes/bares y datos abiertos en SaluData.'
+      },
+      camara: {
+        badge: 'Escalón 04 · Orden Distrital y Registro',
+        titulo: 'Cámara de Comercio',
+        queEs: 'Persona jurídica de derecho privado, sin ánimo de lucro y de carácter gremial, que por delegación legal cumple funciones públicas administrativas como llevar el Registro Mercantil y promover el desarrollo empresarial.',
+        historia: [
+          { year: '1971', desc: 'Decreto 410 (Código de Comercio): regula la naturaleza y funciones de las Cámaras.' },
+          { year: '2014', desc: 'Ley 1727: reforma el régimen de gobernabilidad y afiliados.' },
+          { year: '2020', desc: 'Ley 2069 (Art. 70): traslada su inspección, vigilancia y control a Supersociedades.' }
+        ],
+        ubicacion: 'Entidad privada con funciones públicas delegadas (vigilada por la Superintendencia de Sociedades).',
+        leyes: [
+          'Decreto 410 de 1971 (Código de Comercio, Título VI — De las Cámaras de Comercio).',
+          'Ley 1727 de 2014 (Reforma al régimen y gobernabilidad de las Cámaras de Comercio).',
+          'Ley 2069 de 2020, Art. 70 (Inspección, vigilancia y control a cargo de Supersociedades).'
+        ],
+        funciones: [
+          'Llevar el Registro Mercantil, el Registro Único de Proponentes (RUP) y el registro de entidades sin ánimo de lucro.',
+          'Expedir certificados de existencia y representación legal.',
+          'Ofrecer servicios de arbitraje, conciliación y fortalecimiento para emprendedores y comerciantes.'
+        ],
+        chips: ['Registro Mercantil', 'Registro Único de Proponentes (RUP)', 'Certificados de existencia', 'Arbitraje y conciliación', 'Fortalecimiento empresarial', 'Vigilada por Supersociedades'],
+        ejemplo: 'Cuando creas una empresa en Bogotá, la matriculas en la Cámara de Comercio y renuevas cada año tu matrícula mercantil para operar formalmente.'
+      }
+    };
+
+    const vistaPrincipal = document.getElementById('vista-principal');
+    const vistaDetalle = document.getElementById('vista-detalle');
+
+    function abrirTema(id) {
+      const data = CONTENIDO[id];
+      if (!data) return;
+
+      document.getElementById('det-badge').textContent = data.badge;
+      document.getElementById('det-titulo').textContent = data.titulo;
+      document.getElementById('det-que-es').textContent = data.queEs;
+      document.getElementById('det-ubicacion').textContent = data.ubicacion;
+      document.getElementById('det-ejemplo').textContent = data.ejemplo;
+      document.getElementById('det-leyes').innerHTML = data.leyes.map(l => `<li>${l}</li>`).join('');
+      document.getElementById('det-funciones').innerHTML = data.funciones.map(f => `<li>${f}</li>`).join('');
+      document.getElementById('det-historia').innerHTML = data.historia.map(h => `<div class="tl-item"><span class="tl-year">${h.year}</span><p class="tl-desc">${h.desc}</p></div>`).join('');
+      document.getElementById('det-chips').innerHTML = data.chips.map(c => `<span class="chip">${c}</span>`).join('');
+
+      const wrapCifras = document.getElementById('wrap-cifras');
+      const kpisEl = document.getElementById('det-kpis');
+      const barrasEl = document.getElementById('det-barras');
+      if (data.kpis && data.kpis.length) {
+        kpisEl.innerHTML = data.kpis.map(k => `<div class="kpi-card"><span class="kpi-val">${k.val}</span><span class="kpi-lbl">${k.lbl}</span></div>`).join('');
+        barrasEl.innerHTML = (data.barras || []).map(b => `
+          <div class="bar-row">
+            <div class="bar-meta"><span>${b.label}</span><strong>${b.value}</strong></div>
+            <div class="bar-track"><div class="bar-fill" style="width:${b.pct}%"></div></div>
+          </div>
+        `).join('');
+        wrapCifras.classList.remove('oculto');
+      } else {
+        wrapCifras.classList.add('oculto');
+      }
+
+      vistaPrincipal.classList.add('oculto');
+      vistaDetalle.classList.remove('oculto');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.querySelectorAll('.btn-more').forEach(btn => {
+      btn.addEventListener('click', () => abrirTema(btn.dataset.tema));
+    });
+
+    document.getElementById('btn-volver').addEventListener('click', () => {
+      vistaDetalle.classList.add('oculto');
+      vistaPrincipal.classList.remove('oculto');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        vistaDetalle.classList.add('oculto');
+        vistaPrincipal.classList.remove('oculto');
+      });
+    });
+  </script>
+</body>
+</html>
