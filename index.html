@@ -40,7 +40,6 @@
       overflow-x: hidden;
     }
 
-    /* Barra superior elegante */
     nav {
       display: flex;
       justify-content: center;
@@ -66,7 +65,6 @@
       border-bottom-color: var(--crimson-light);
     }
 
-    /* Portada estilo diagrama editorial */
     .hero {
       position: relative;
       width: 100%;
@@ -235,7 +233,6 @@
       transform: translateY(-2px);
     }
 
-    /* Contenedor del diagrama */
     .flow-container {
       max-width: 1140px;
       width: 100%;
@@ -250,7 +247,6 @@
       animation: fadeUp 0.75s ease;
     }
 
-    /* Etiqueta pill dorada con acento vino sutil */
     .tier-pill {
       display: inline-flex;
       align-items: center;
@@ -276,7 +272,6 @@
       stroke-linejoin: round;
     }
 
-    /* Conectores SVG elegantes */
     .flow-connector {
       display: flex;
       justify-content: center;
@@ -295,7 +290,6 @@
       max-width: 320px;
     }
 
-    /* Filas de tarjetas */
     .tier-row {
       display: flex;
       flex-wrap: wrap;
@@ -324,7 +318,6 @@
       text-shadow: 0 0 10px rgba(242, 185, 80, 0.45);
     }
 
-    /* Tarjetas de nodo estilo glass oscuro */
     .node-card {
       flex: 1 1 220px;
       max-width: 295px;
@@ -439,7 +432,6 @@
 
     .oculto { display: none !important; }
 
-    /* Vista de detalle uniforme */
     .vista-detalle {
       max-width: 940px;
       width: 100%;
@@ -703,6 +695,64 @@
       color: var(--white);
     }
 
+    /* Sección de Referencias y Bibliografía */
+    .ref-section {
+      margin-top: 3.4rem;
+      text-align: left;
+    }
+    .ref-header {
+      text-align: center;
+      margin-bottom: 1.4rem;
+    }
+    .ref-box {
+      background: rgba(18, 22, 58, 0.72);
+      border: 1px solid rgba(242, 185, 80, 0.28);
+      border-top: 2px solid rgba(242, 185, 80, 0.65);
+      border-radius: 18px;
+      padding: 1.7rem 1.8rem;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 14px 36px rgba(6, 8, 28, 0.45);
+    }
+    .ref-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 0.9rem 1.5rem;
+      list-style: none;
+      counter-reset: ref-counter;
+    }
+    .ref-list li {
+      counter-increment: ref-counter;
+      position: relative;
+      padding-left: 1.9rem;
+      font-size: 0.79rem;
+      color: var(--soft);
+      line-height: 1.6;
+    }
+    .ref-list li::before {
+      content: counter(ref-counter, decimal-leading-zero);
+      position: absolute;
+      left: 0;
+      top: 0.1rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--crimson-light);
+      letter-spacing: 0.06em;
+    }
+    .ref-list strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+    .ref-list a {
+      color: var(--gold-light);
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(242, 185, 80, 0.5);
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .ref-list a:hover {
+      color: var(--white);
+      border-bottom-color: var(--crimson-light);
+    }
+
     footer {
       text-align: center;
       padding: 1.6rem 1rem 2.6rem;
@@ -748,6 +798,7 @@
     <a href="#escalon-2" class="nav-link">Control</a>
     <a href="#escalon-3" class="nav-link">Nacional</a>
     <a href="#escalon-4" class="nav-link">Distrital</a>
+    <a href="#referencias" class="nav-link">Referencias</a>
   </nav>
 
   <div id="vista-principal">
@@ -759,7 +810,6 @@
       </svg>
 
       <div class="hero-content">
-        <!-- Monograma EC bicolor (blanco + dorado + detalle vino) -->
         <svg class="monogram" viewBox="0 0 80 80" fill="none">
           <path d="M35 16H17V64H35M17 40H32" stroke="#ffffff" stroke-width="5.5" stroke-linecap="square"/>
           <path d="M62 24C58 18 52 16 46 16C39 16 38 22 38 40C38 58 39 64 46 64C52 64 58 62 62 56" stroke="#f2b950" stroke-width="5.5" stroke-linecap="square"/>
@@ -820,7 +870,6 @@
         </div>
       </section>
 
-      <!-- Conector Escalón 1 -> 2 -->
       <div class="flow-connector compact" aria-hidden="true">
         <svg viewBox="0 0 320 44" fill="none">
           <defs>
@@ -886,7 +935,6 @@
         </div>
       </section>
 
-      <!-- Conector convergente 3 ramas (Escalón 2 -> 3) -->
       <div class="flow-connector" aria-hidden="true">
         <svg viewBox="0 0 780 54" fill="none">
           <path d="M140 0 V18 Q140 28 150 28 H630 Q640 28 640 18 V0" stroke="#f2b950" stroke-width="1.8" stroke-opacity="0.8"/>
@@ -959,7 +1007,6 @@
           </article>
         </div>
 
-        <!-- Conector sutil hacia Superintendencia Financiera -->
         <div class="flow-connector" aria-hidden="true">
           <svg viewBox="0 0 780 42" fill="none">
             <path d="M110 0 V20 Q110 30 120 30 H260" stroke="#f2b950" stroke-width="1.6" stroke-opacity="0.72"/>
@@ -985,7 +1032,6 @@
         </div>
       </section>
 
-      <!-- Conector Escalón 3 -> 4 -->
       <div class="flow-connector compact" aria-hidden="true">
         <svg viewBox="0 0 320 44" fill="none">
           <path d="M160 0 V36" stroke="url(#g1)" stroke-width="2"/>
@@ -1040,6 +1086,32 @@
           </article>
         </div>
       </section>
+
+      <!-- REFERENCIAS Y BIBLIOGRAFÍA -->
+      <section id="referencias" class="ref-section">
+        <div class="ref-header">
+          <div class="tier-pill" style="margin-bottom:0;">
+            <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            Referencias y Bibliografía
+          </div>
+        </div>
+        <div class="ref-box">
+          <ol class="ref-list">
+            <li><strong>Asamblea Nacional Constituyente (1991).</strong> <em>Constitución Política de Colombia</em> (Títulos III, IV, V y X; Arts. 1, 3, 96, 101–102, 113–121, 209, 267–284, 288 y 332). <a href="http://www.secretariasenado.gov.co/senado/basedoc/constitucion_politica_1991_pr009.html" target="_blank" rel="noopener noreferrer">Secretaría del Senado</a>.</li>
+            <li><strong>Departamento Nacional de Planeación (DNP) &amp; ESAP (2011).</strong> <em>Elementos básicos del Estado colombiano</em> (Guía No. 1, Unidad 1) y Consejo de Estado, Concepto 1.367 del 28 de febrero de 2002.</li>
+            <li><strong>Departamento Administrativo de la Función Pública (DAFP).</strong> <em>Manual de Estructura del Estado Colombiano</em> y <em>Organismos de Control</em>. <a href="https://www.funcionpublica.gov.co/gestor-normativo/manual-estructura-del-estado" target="_blank" rel="noopener noreferrer">Manual General</a> · <a href="https://www.funcionpublica.gov.co/gestor-normativo/manual-estructura-del-estado/organismos-control" target="_blank" rel="noopener noreferrer">Organismos de Control</a>.</li>
+            <li><strong>Congreso de la República de Colombia.</strong> Marco orgánico y de control fiscal: Ley 489 de 1998, Ley 1454 de 2011 (LOOT), Leyes 42 y 106 de 1993, Ley 610 de 2000, Decretos Ley 262, 267 y 272 de 2000, y Acto Legislativo 02 de 2015.</li>
+            <li><strong>Ministerio de Comercio, Industria y Turismo (MinCIT).</strong> Normatividad orgánica (Ley 7 de 1991, Ley 790 de 2002, Decreto 210 de 2003 y Decreto 1289 de 2015) y presupuesto sectorial 2026.</li>
+            <li><strong>Dirección de Impuestos y Aduanas Nacionales (DIAN).</strong> Decreto 2117 de 1992, Decreto 4048 de 2008, Ley 1819 de 2016, Decreto 1742 de 2020 y cifras oficiales de presupuesto y recaudo 2026.</li>
+            <li><strong>Instituto Nacional de Vigilancia de Medicamentos y Alimentos (INVIMA).</strong> Ley 100 de 1993 (Art. 245), Ley 9ª de 1979 (Código Sanitario Nacional) y Decreto 2078 de 2012.</li>
+            <li><strong>Superintendencia de Sociedades.</strong> Ley 222 de 1995, Ley 1116 de 2006, Decreto 1736 de 2020 y Ley 2069 de 2020 (Art. 70). <a href="https://www.supersociedades.gov.co/web/nuestra-entidad" target="_blank" rel="noopener noreferrer">Portal institucional</a> · <a href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=153926" target="_blank" rel="noopener noreferrer">Decreto 1736/2020</a>.</li>
+            <li><strong>Superintendencia Financiera de Colombia (SFC).</strong> Decreto 663 de 1993, Ley 964 de 2005, Decreto 4327 de 2005, Decreto 2555 de 2010 y Decreto 2399 de 2019. <a href="https://www.superfinanciera.gov.co/publicaciones/60607/nuestra-entidadacerca-de-la-sfc-60607/" target="_blank" rel="noopener noreferrer">Acerca de la SFC</a>.</li>
+            <li><strong>Secretaría Distrital de Hacienda de Bogotá.</strong> Decreto Ley 1421 de 1993 (Estatuto Orgánico de Bogotá), Acuerdo Distrital 257 de 2006, Decreto Distrital 601 de 2014 y plataforma BogData.</li>
+            <li><strong>Secretaría Distrital de Salud de Bogotá.</strong> Ley 100 de 1993, Ley 715 de 2001, Ley Estatutaria 1751 de 2015, Decreto Distrital 507 de 2013, Acuerdo 641 de 2016 y Modelo MAS Bienestar.</li>
+            <li><strong>Cámaras de Comercio de Colombia.</strong> Decreto 410 de 1971 (Código de Comercio, Título VI), Ley 1727 de 2014 y Ley 2069 de 2020 (Art. 70). <a href="https://www.camarabaq.org.co/acerca-de-nosotros/ley-de-transparencia/normatividad-servicios-y-tramites-funcion-publica-registral/" target="_blank" rel="noopener noreferrer">Normatividad registral</a>.</li>
+          </ol>
+        </div>
+      </section>
     </main>
 
     <footer>
@@ -1062,20 +1134,17 @@
         <div id="det-art" class="det-art-frame" aria-hidden="true"></div>
       </div>
 
-      <!-- Bloque 1: Presupuesto y cifras clave (cuando aplica) -->
       <div id="wrap-cifras" class="info-panel oculto" style="margin-top:1.3rem;">
         <h4>Presupuesto y cifras clave</h4>
         <div id="det-kpis" class="kpi-grid"></div>
         <div id="det-barras" class="bars-wrap"></div>
       </div>
 
-      <!-- Bloque 2: Línea de tiempo e historia (en todos) -->
       <div class="info-panel" style="margin-top:1.3rem;">
         <h4>Línea de tiempo e historia</h4>
         <div id="det-historia" class="timeline"></div>
       </div>
 
-      <!-- Bloque 3: Ubicación + Marco legal (en todos) -->
       <div class="detalle-grid">
         <div class="info-panel">
           <h4>Ubicación en el Estado</h4>
@@ -1087,19 +1156,16 @@
         </div>
       </div>
 
-      <!-- Bloque 4: Componentes y funciones clave (en todos) -->
       <div class="info-panel" style="margin-bottom:1.2rem;">
         <h4>Componentes y funciones clave</h4>
         <ul id="det-funciones"></ul>
       </div>
 
-      <!-- Bloque 5: Estructura, alcance y servicios (en todos) -->
       <div class="info-panel" style="margin-bottom:1.2rem;">
         <h4>Estructura, alcance y servicios</h4>
         <div id="det-chips" class="chips-wrap"></div>
       </div>
 
-      <!-- Bloque 6: Aplicación práctica (en todos) -->
       <div class="info-panel">
         <h4>Aplicación práctica</h4>
         <p id="det-ejemplo"></p>
